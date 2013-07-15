@@ -35,6 +35,12 @@ public class Maze implements ApplicationListener {
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 	}
 
+	public void move () 
+	{
+	
+	}
+	
+	
 	@Override
 	public void dispose() {
 		batch.dispose();
