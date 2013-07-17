@@ -40,22 +40,22 @@ public class Maze implements ApplicationListener {
 		
 		if((Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) )
 		{
-			x += -10f;
+			x += -3f;
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.DPAD_RIGHT))
 		{
-			x += 10f;
+			x += 3f;
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.DPAD_UP))
 		{
-			y += 10f;
+			y += 3f;
 		}
 	
 		if(Gdx.input.isKeyPressed(Keys.DPAD_DOWN)) 
 		{
-			y += -10f;
+			y += -3f;
 		}
 	
 		if(x >= 614)
