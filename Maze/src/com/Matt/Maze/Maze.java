@@ -2,6 +2,7 @@ package com.Matt.Maze;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -35,13 +36,28 @@ public class Maze implements ApplicationListener {
 	
 	public void update()
 	{
-		x += 0.1f;
-		y += 0.1f;	
+			
 		
-		if(x > 10)
+		if((Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) )
 		{
-			xDelta = -xDelta;
+			x += -1f;
 		}
+		
+		if(Gdx.input.isKeyPressed(Keys.DPAD_RIGHT))
+		{
+			x += 1f;
+		}
+		
+		if(Gdx.input.isKeyPressed(Keys.DPAD_UP))
+		{
+			y += 1f;
+		}
+	
+		if(Gdx.input.isKeyPressed(Keys.DPAD_DOWN)) 
+		{
+			y += -1f;
+		}
+		
 	}
 
 	@Override
