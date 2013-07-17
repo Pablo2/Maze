@@ -24,7 +24,6 @@ public class Maze implements ApplicationListener {
 		batch = new SpriteBatch();
 		
 		texture = new Texture(Gdx.files.internal("data/libgdx.png"));
-	
 	}
 	
 	@Override
@@ -41,22 +40,22 @@ public class Maze implements ApplicationListener {
 		
 		if((Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) )
 		{
-			x += -3f;
+			x += -10f;
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.DPAD_RIGHT))
 		{
-			x += 3f;
+			x += 10f;
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.DPAD_UP))
 		{
-			y += 3f;
+			y += 10f;
 		}
 	
 		if(Gdx.input.isKeyPressed(Keys.DPAD_DOWN)) 
 		{
-			y += -3f;
+			y += -10f;
 		}
 	
 		if(x >= 614)
