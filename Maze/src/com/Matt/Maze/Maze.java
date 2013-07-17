@@ -71,7 +71,7 @@ public class Maze implements ApplicationListener {
 	
 		if(y >= 260)
 		{
-			y=260;
+			y= 260;
 		}
 	
 	if(y<= -277)
