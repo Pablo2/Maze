@@ -10,8 +10,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Maze";
 		cfg.useGL20 = false;
-		cfg.width = 280;
-		cfg.height = 280;
+		cfg.width = 800;
+		cfg.height = 600;
 		
 		new LwjglApplication(new Maze(), cfg);
 	}
