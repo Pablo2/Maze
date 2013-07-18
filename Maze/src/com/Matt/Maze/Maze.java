@@ -1,5 +1,7 @@
 package com.Matt.Maze;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -16,14 +18,15 @@ public class Maze implements ApplicationListener {
 	private SpriteBatch batch;
 	private Texture mario;
 	private Texture maze;
-	private Rectangle rect1;
 	
 	private int width = 484;
 	private int height = 260;
 	private int tileWidth = 484/11;
 	private int tileHeight = 260/7;
 	
-	private Tile[][] tileMap = new Tile[7][11]; //y,x
+	private HashMap<Integer, Boolean> keyP = new HashMap<Integer, Boolean>();
+	
+	private Tile[][] tileMap = new Tile[8][11]; //y,x
 	
 	float marioX = tileWidth / 2;
 	float marioY = tileHeight/ 2;
@@ -35,7 +38,6 @@ public class Maze implements ApplicationListener {
 		
 		mario = new Texture(Gdx.files.internal("data/libgdx.png"));
 		maze = new Texture(Gdx.files.internal("data/maze.png"));
-		rect1 = new Rectangle();
 		
 		for(int y = 0; y < tileMap.length; y++)
 		{
@@ -44,8 +46,25 @@ public class Maze implements ApplicationListener {
 				tileMap[y][x] = new Tile();
 			}
 		}
-		
 		tileMap[0][0].up = true;
+		tileMap[0][0].left = false;
+		tileMap[0][0].right = false;
+		tileMap[1][0].up = true;
+		tileMap[2][0].up=true;
+		tileMap[3][0].up=true;
+		tileMap[4][0].up=true;
+		tileMap[5][0].up=true;
+		tileMap[6][0].up=true;
+		tileMap[1][0].down = true;
+		tileMap[2][0].down=true;
+		tileMap[3][0].down=true;
+		tileMap[4][0].down=true;
+		tileMap[5][0].down=true;
+		tileMap[7][0].up=false;
+		tileMap[6][0].down=true;
+		tileMap[6][0].right=true;
+		tileMap[6][1].down=true;
+		tileMap[6][1].up=true;
 	}
 	
 	@Override
@@ -54,54 +73,75 @@ public class Maze implements ApplicationListener {
 		mario.dispose();
 	}
 	
-	float xDelta = 0.1f;
+	float xDelta = 0.01f;
 	
 	public void update()
 	{
 		int marioTileX = (int)(marioX / tileWidth);
 		int marioTileY = (int)(marioY / tileHeight);
 		
-		if((Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) )
+		if(Gdx.input.isKeyPressed(Keys.DPAD_LEFT))
 		{
-			marioX += -tileWidth;;
+			if( (!keyP.get(Keys.DPAD_LEFT)))
+			{
+				if(tileMap[marioTileY][marioTileX].left)
+				{
+					keyP.put(Keys.DPAD_LEFT, true);
+					marioX += -tileWidth;;
+				}
+			}
+		}
+		else
+		{
+			keyP.put(Keys.DPAD_LEFT, false);
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.DPAD_RIGHT))
 		{
-			marioX += tileWidth;;
+			if( (!keyP.get(Keys.DPAD_RIGHT)))
+			{
+			if(tileMap[marioTileY][marioTileX].right)
+			{
+				keyP.put(Keys.DPAD_RIGHT, true);
+				marioX += tileWidth;;
+			}
 		}
-		
+	}
+		else
+		{
+			keyP.put(Keys.DPAD_RIGHT, false);
+		}
 		if(Gdx.input.isKeyPressed(Keys.DPAD_UP))
 		{
-			if(tileMap[marioTileY][marioTileX].up)
+			if( (!keyP.get(Keys.DPAD_UP)))
 			{
-				marioY += tileHeight;;
+				if(tileMap[marioTileY][marioTileX].up)
+				{
+					keyP.put(Keys.DPAD_UP, true);
+					marioY += tileHeight;;
+				}
 			}
+		}
+		else
+		{
+			keyP.put(Keys.DPAD_UP, false);
 		}
 	
 		if(Gdx.input.isKeyPressed(Keys.DPAD_DOWN)) 
 		{
-			marioY += -tileHeight;;
+			if ( (!keyP.get(Keys.DPAD_DOWN)))
+			{
+			if(tileMap[marioTileY][marioTileX].down)
+			{
+				keyP.put(Keys.DPAD_DOWN, true);
+				marioY += -tileHeight;;
+			}
 		}
-	
-		if(marioX >= 484)
-		{
-			marioX = 484;
-		}
-		if(marioX <= -6)
-		{
-		marioX = -6;
-		}
-	
-		if(marioY >= 260)
-		{
-			marioY= 260;
-		}
-	
-	if(marioY<= -45)
-	{
-		marioY=-45;
 	}
+		else
+		{
+			keyP.put(Keys.DPAD_DOWN, false);
+		}
 	}
 	
 
