@@ -26,7 +26,7 @@ public class Maze implements ApplicationListener {
 	
 	private HashMap<Integer, Boolean> keyP = new HashMap<Integer, Boolean>();
 	
-	private Tile[][] tileMap = new Tile[8][11]; //y,x
+	private Tile[][] tileMap = new Tile[20][20]; //y,x
 	
 	float marioX = tileWidth / 2;
 	float marioY = tileHeight/ 2;
@@ -61,10 +61,45 @@ public class Maze implements ApplicationListener {
 		tileMap[4][0].down=true;
 		tileMap[5][0].down=true;
 		tileMap[7][0].up=false;
+		tileMap[7][0].down=true;
 		tileMap[6][0].down=true;
 		tileMap[6][0].right=true;
 		tileMap[6][1].down=true;
 		tileMap[6][1].up=true;
+		tileMap[6][1].left=true;
+		tileMap[7][0].right=true;
+		tileMap[0][1].up = true;
+		tileMap[1][1].up=true;
+		tileMap[2][1].up=true;
+		tileMap[4][1].up=true;
+		tileMap[5][1].up=true;
+		tileMap[7][1].right = true;
+		tileMap[4][1].right = true;
+		tileMap[7][2].right = true;
+		tileMap[7][3].right = true;
+		tileMap[7][4].right = true;
+		tileMap[7][5].right = true;
+		tileMap[7][6].right = true;
+		tileMap[7][7].right = true;
+		tileMap[7][8].right = true;
+		tileMap[7][9].right = true;
+		tileMap[0][1].right = true;
+		tileMap[2][1].right = true;
+		tileMap[0][2].right = true;
+		tileMap[0][3].right = true;
+		tileMap[0][4].right = true;
+		tileMap[0][5].right = true;
+		tileMap[0][6].right = true;
+		tileMap[0][7].right = true;
+		tileMap[2][1].right = true;
+		tileMap[2][2].right = true;
+		tileMap[2][3].right = true;
+		tileMap[2][4].right = true;
+		tileMap[2][5].right = true;
+		tileMap[5][7].right = true;
+		tileMap[5][8].right = true;
+		tileMap[5][9].right = true;
+		tileMap[5][10].right = true;
 	}
 	
 	@Override
