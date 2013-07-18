@@ -10,76 +10,100 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Maze implements ApplicationListener {
 	private SpriteBatch batch;
-	private Texture texture;
+	private Texture mario;
+	private Texture maze;
+	private Rectangle rect1;
 	
-	float x = 0.0f;
-	float y = 0.0f;
+	private int width = 484;
+	private int height = 260;
+	private int tileWidth = 484/11;
+	private int tileHeight = 260/7;
+	
+	private Tile[][] tileMap = new Tile[7][11]; //y,x
+	
+	float marioX = tileWidth / 2;
+	float marioY = tileHeight/ 2;
 	
 	@Override
 	public void create() 
 	{		
 		batch = new SpriteBatch();
 		
-		texture = new Texture(Gdx.files.internal("data/libgdx.png"));
+		mario = new Texture(Gdx.files.internal("data/libgdx.png"));
+		maze = new Texture(Gdx.files.internal("data/maze.png"));
+		rect1 = new Rectangle();
+		
+		for(int y = 0; y < tileMap.length; y++)
+		{
+			for(int x = 0; x < tileMap.length; x++)
+			{
+				tileMap[y][x] = new Tile();
+			}
+		}
+		
+		tileMap[0][0].up = true;
 	}
 	
 	@Override
 	public void dispose() {
 		batch.dispose();
-		texture.dispose();
+		mario.dispose();
 	}
 	
 	float xDelta = 0.1f;
 	
 	public void update()
 	{
-			
+		int marioTileX = (int)(marioX / tileWidth);
+		int marioTileY = (int)(marioY / tileHeight);
 		
 		if((Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) )
 		{
-			x += -3f;
+			marioX += -tileWidth;;
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.DPAD_RIGHT))
 		{
-			x += 3f;
+			marioX += tileWidth;;
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.DPAD_UP))
 		{
-			y += 3f;
+			if(tileMap[marioTileY][marioTileX].up)
+			{
+				marioY += tileHeight;;
+			}
 		}
 	
 		if(Gdx.input.isKeyPressed(Keys.DPAD_DOWN)) 
 		{
-			y += -3f;
+			marioY += -tileHeight;;
 		}
 	
-		if(x >= 614)
+		if(marioX >= 484)
 		{
-			x = 614;
+			marioX = 484;
 		}
-		
-		if(x <= -140)
+		if(marioX <= -6)
 		{
-		x = -140;
-		}
-	
-		if(y >= 260)
-		{
-			y= 260;
+		marioX = -6;
 		}
 	
-	if(y<= -277)
+		if(marioY >= 260)
+		{
+			marioY= 260;
+		}
+	
+	if(marioY<= -45)
 	{
-		y=-277;
+		marioY=-45;
+	}
 	}
 	
-	
-	}
 
 	@Override
 	public void render() 
@@ -90,7 +114,8 @@ public class Maze implements ApplicationListener {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
-			batch.draw(texture, x, y);
+		batch.draw(maze, 0,0);	
+		batch.draw(mario, marioX, marioY);
 		batch.end();
 	}
 
